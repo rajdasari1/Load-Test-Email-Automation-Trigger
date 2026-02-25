@@ -1,7 +1,7 @@
 name: Build and Send Load Test Email
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch: {}   # Ensures it appears in Actions tab for manual runs
   push:
     paths:
       - "data/*.csv"
@@ -9,7 +9,7 @@ on:
       - "requirements.txt"
       - ".github/workflows/send_loadtest_email.yml"
   schedule:
-    - cron: "0 23 * * 1-5"   # Weekdays at 23:00 UTC; adjust as needed
+    - cron: "0 23 * * 1-5"
 
 jobs:
   build-and-send:
@@ -64,9 +64,6 @@ from src.send_email import send_email_html
 with open("out/email.html","r",encoding="utf-8") as f:
     html = f.read()
 
-# Optional: Attach defects workbook or CSVs. Toggle by editing this list.
 attachments = []
-# attachments = ["data/ComparisonReport.csv", "data/TopSlowTransactions.csv", "data/ErrorDetails.csv", "data/load_test_results.csv", "NY_MECM_Performance_issues.xlsx"]
-
 send_email_html(html, attachments=attachments)
 PYCODE
