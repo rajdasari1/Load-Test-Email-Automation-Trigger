@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Load Test Summary Email</title>
+  </head>
+  <body style="font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.4;">
+    <p>Hello Everyone,</p>
+
+    <p>Please find below the test results from the latest load test on the Member Portal, executed with {{executed_users}} users. Additionally, we have included comparison reports for the two most recent test runs conducted on Release 1.1.</p>
+
+    <h3 style="margin-top:24px;">Scenarios:</h3>
+    {{scenarios_table}}
+
+    <h3 style="margin-top:24px;">Load test summary:</h3>
+    {{load_test_summary_heading_row}}
+    {{load_test_summary_tables}}
+
+    <h3 style="margin-top:24px;">Defect summary sheet-</h3>
+    <p>Please find the attached sheet for active defects/issues of PERF environment below.</p>
+    <p><strong>{{defect_sheet_name}}</strong></p>
+
+    <h3 style="margin-top:24px;">High Response Times:</h3>
+    <p>Please find the top 50 high response sub transactions, for more details please find attached sheet.</p>
+    {{top_slow_table}}
+
+    <h3 style="margin-top:24px;">Comparison Report: Version 1.1 ({{executed_users}} Users) vs. Version 1.1 ({{executed_users}} Users) :-</h3>
+    <p>Please find below the top 50 transactions with the highest response times.</p>
+    {{comparison_heading_row}}
+    {{comparison_tables}}
+
+    <h3 style="margin-top:24px;">Observations:</h3>
+    <ul>
+      {% for obs in observations %}
+      <li>{{obs}}</li>
+      {% endfor %}
+    </ul>
+
+    <p style="margin-top:24px;">Thanks &amp; Regards,</p>
+    <p>{{sender_name}}</p>
+  </body>
+</html>
